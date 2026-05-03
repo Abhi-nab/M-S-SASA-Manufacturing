@@ -1,0 +1,6 @@
+.modal { display:none; position:fixed; inset:0; background:rgba(0,0,0,0.5); z-index:2000; align-items:center; justify-content:center; }
+.modal-content { background:#fff; padding:30px; border-radius:16px; width:400px; position:relative; }
+.btn { padding:14px 22px; border-radius:10px; cursor:pointer; font-weight:700; border:none; background:#2563eb; color:#fff; }
+input { width:100%; padding:12px; margin-bottom:10px; border:1px solid #ccc; border-radius:8px; }
+.submit-btn { width:100%; padding:12px; background:#f97316; color:white; border:none; border-radius:8px; cursor:pointer; }
+.modal-footer { margin-top:20px; text-align:center; }

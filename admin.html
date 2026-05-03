@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin Dashboard</title>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body>
+    <h1>Manufacturing Admin Portal</h1>
+    <div id="orderList">Loading orders...</div>
+
+    <script>
+        const supabase = supabase.createClient('YOUR_URL', 'YOUR_KEY');
+
+        async function secureAdminPage() {
+            const { data: { user } } = await supabase.auth.getUser();
+            if (!user) window.location.href = '/index.html';
+
+            const { data: profile } = await supabase
+                .from('profiles')
+                .select('role')
+                .eq('id', user.id)
+                .single();
+
+            // The Security Guard
+            if (profile?.role !== 'admin') {
+                alert("Unauthorized Access");
+                window.location.href = '/index.html';
+            } else {
+                // Fetch and display orders
+                const { data: orders } = await supabase.from('orders').select('*');
+                document.getElementById('orderList').innerText = JSON.stringify(orders);
+            }
+        }
+
+        secureAdminPage();
+    </script>
+</body>
+</html>

@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Manufacturing Company</title>
+  <style>
+    :root{
+      --primary:#0f172a;
+      --accent:#f97316;
+      --accent2:#2563eb;
+      --bg:#f8fafc;
+      --card:#ffffff;
+      --text:#1e293b;
+      --muted:#64748b;
+      --border:#e2e8f0;
+    }
+
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{
+      font-family: Arial, Helvetica, sans-serif;
+      background:var(--bg);
+      color:var(--text);
+      line-height:1.6;
+    }
+    a{text-decoration:none;color:inherit}
+
+    .container{
+      width:min(1200px, 92%);
+      margin:auto;
+    }
+
+    header{
+      background:linear-gradient(135deg, var(--primary), #111827);
+      color:#fff;
+      position:sticky;
+      top:0;
+      z-index:1000;
+      box-shadow:0 6px 20px rgba(0,0,0,.12);
+    }
+
+    .nav{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      padding:16px 0;
+      gap:20px;
+      flex-wrap:wrap;
+    }
+
+    .logo{
+      font-size:1.4rem;
+      font-weight:700;
+      letter-spacing:.5px;
+    }
+    .logo span{color:var(--accent)}
+
+    nav ul{
+      display:flex;
+      gap:20px;
+      list-style:none;
+      flex-wrap:wrap;
+    }
+    nav a{
+      color:#e2e8f0;
+      font-weight:600;
+    }
+    nav a:hover{color:#fff}
+
+    .hero{
+      padding:90px 0;
+      background:
+        linear-gradient(rgba(15,23,42,.78), rgba(15,23,42,.78)),
+        url('https://images.unsplash.com/photo-1565043589221-1a6fd9ae45c7?auto=format&fit=crop&w=1600&q=80') center/cover no-repeat;
+      color:#fff;
+    }
+
+    .hero-grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+      gap:32px;
+      align-items:center;
+    }
+
+    .hero h1{
+      font-size:clamp(2rem, 4vw, 4rem);
+      line-height:1.1;
+      margin-bottom:16px;
+    }
+    .hero p{
+      color:#cbd5e1;
+      font-size:1.05rem;
+      margin-bottom:24px;
+      max-width:640px;
+    }
+
+    .btns{
+      display:flex;
+      gap:14px;
+      flex-wrap:wrap;
+    }
+    .btn{
+      display:inline-block;
+      padding:14px 22px;
+      border-radius:10px;
+      font-weight:700;
+      transition:.25s;
+    }
+    .btn.primary{
+      background:var(--accent);
+      color:#fff;
+    }
+    .btn.primary:hover{background:#ea580c}
+    .btn.secondary{
+      background:transparent;
+      border:1px solid rgba(255,255,255,.35);
+      color:#fff;
+    }
+    .btn.secondary:hover{border-color:#fff}
+
+    section{
+      padding:72px 0;
+    }
+
+    .section-title{
+      text-align:center;
+      margin-bottom:34px;
+    }
+    .section-title h2{
+      font-size:2rem;
+      margin-bottom:10px;
+    }
+    .section-title p{
+      color:var(--muted);
+      max-width:700px;
+      margin:auto;
+    }
+
+    .features{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+      gap:18px;
+    }
+    .feature{
+      background:var(--card);
+      border:1px solid var(--border);
+      padding:22px;
+      border-radius:16px;
+      box-shadow:0 8px 20px rgba(15,23,42,.04);
+    }
+    .feature h3{margin-bottom:8px}
+    .feature p{color:var(--muted)}
+
+    .products{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+      gap:22px;
+    }
+    .product{
+      background:var(--card);
+      border:1px solid var(--border);
+      border-radius:16px;
+      overflow:hidden;
+      box-shadow:0 8px 20px rgba(15,23,42,.05);
+    }
+    .product img{
+      width:100%;
+      height:220px;
+      object-fit:cover;
+      display:block;
+    }
+    .product-content{
+      padding:18px;
+    }
+    .product h3{margin-bottom:8px}
+    .product p{
+      color:var(--muted);
+      font-size:.96rem;
+      margin-bottom:12px;
+    }
+    .tag{
+      display:inline-block;
+      background:#fff7ed;
+      color:#c2410c;
+      padding:6px 10px;
+      border-radius:999px;
+      font-size:.85rem;
+      font-weight:700;
+      margin-bottom:10px;
+    }
+
+    .about-grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+      gap:24px;
+      align-items:center;
+    }
+    .about-img{
+      border-radius:18px;
+      overflow:hidden;
+      box-shadow:0 10px 26px rgba(15,23,42,.08);
+    }
+    .about-img img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      display:block;
+    }
+    .about-text h2{
+      margin-bottom:14px;
+      font-size:2rem;
+    }
+    .about-text p{
+      color:var(--muted);
+      margin-bottom:14px;
+    }
+
+    .order-wrap{
+      display:grid;
+      grid-template-columns:1.05fr .95fr;
+      gap:24px;
+    }
+    .form-card, .info-card{
+      background:var(--card);
+      border:1px solid var(--border);
+      border-radius:18px;
+      padding:24px;
+      box-shadow:0 10px 24px rgba(15,23,42,.05);
+    }
+
+    form{
+      display:grid;
+      gap:14px;
+    }
+    .row{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+      gap:14px;
+    }
+    input, select, textarea{
+      width:100%;
+      padding:13px 14px;
+      border:1px solid var(--border);
+      border-radius:10px;
+      font:inherit;
+      background:#fff;
+      outline:none;
+    }
+    input:focus, select:focus, textarea:focus{
+      border-color:var(--accent2);
+      box-shadow:0 0 0 3px rgba(37,99,235,.08);
+    }
+    textarea{min-height:120px;resize:vertical}
+
+    .submit-btn{
+      background:var(--accent2);
+      color:#fff;
+      border:none;
+      padding:14px 18px;
+      border-radius:10px;
+      font-weight:700;
+      cursor:pointer;
+    }
+    .submit-btn:hover{background:#1d4ed8}
+
+    .info-card h3{
+      margin-bottom:12px;
+    }
+    .info-card ul{
+      list-style:none;
+      display:grid;
+      gap:12px;
+      margin-top:14px;
+    }
+    .info-card li{
+      padding:12px 14px;
+      border:1px solid var(--border);
+      border-radius:12px;
+      background:#f8fafc;
+    }
+
+    .contact-grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+      gap:18px;
+    }
+    .contact-box{
+      background:var(--card);
+      border:1px solid var(--border);
+      border-radius:16px;
+      padding:20px;
+      text-align:center;
+      box-shadow:0 8px 20px rgba(15,23,42,.04);
+    }
+    .contact-box h3{margin-bottom:8px}
+
+    footer{
+      background:var(--primary);
+      color:#cbd5e1;
+      padding:24px 0;
+      text-align:center;
+    }
+
+    @media (max-width: 768px){
+      nav ul{gap:12px}
+      .hero{padding:70px 0}
+      .order-wrap{grid-template-columns:1fr}
+      .hero h1{font-size:2.3rem}
+    }
+  </style>
+</head>
+<!-- Auth Modal Trigger -->
+<button onclick="toggleModal(true)" class="btn primary">Book Now</button>
+
+<!-- Modal Overlay -->
+<div id="authModal" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.5); z-index:2000; align-items:center; justify-content:center;">
+  <div style="background:#fff; padding:30px; border-radius:16px; width:400px; position:relative;">
+    <button onclick="toggleModal(false)" style="position:absolute; top:10px; right:15px; border:none; background:none; cursor:pointer; font-size:1.2rem;">&times;</button>
+    
+    <div style="text-align:center; margin-bottom:20px;">
+      <h2 id="modalTitle">Sign In</h2>
+      <p id="modalSub">Welcome back to our portal</p>
+    </div>
+
+    <form id="authForm" style="display:grid; gap:15px;">
+      <input type="email" placeholder="Email Address" required style="padding:12px; border:1px solid #ccc; border-radius:8px;">
+      <input type="password" placeholder="Password" required style="padding:12px; border:1px solid #ccc; border-radius:8px;">
+      <button type="submit" class="submit-btn" style="width:100%">Submit</button>
+    </form>
+
+    <div style="margin-top:20px; text-align:center; font-size:0.9rem;">
+      <p id="toggleText">Don't have an account? <a href="#" onclick="switchMode()">Sign Up</a></p>
+      <hr style="margin:15px 0;">
+      <a href="#order" onclick="toggleModal(false)">Continue as Guest</a>
+    </div>
+  </div>
+</div>
+
+<script>
+  function toggleModal(show) { document.getElementById('authModal').style.display = show ? 'flex' : 'none'; }
+  
+  function switchMode() {
+    const isSignup = document.getElementById('modalTitle').innerText === 'Sign In';
+    document.getElementById('modalTitle').innerText = isSignup ? 'Sign Up' : 'Sign In';
+    document.getElementById('modalSub').innerText = isSignup ? 'Join our manufacturing network' : 'Welcome back to our portal';
+    document.getElementById('toggleText').innerHTML = isSignup ? 'Already have an account? <a href="#" onclick="switchMode()">Sign In</a>' : 'Don\'t have an account? <a href="#" onclick="switchMode()">Sign Up</a>';
+  }
+</script>
+<body>
+
+  <header>
+    <div class="container nav">
+      <div class="logo">Your<span>Manufacturing</span>Co</div>
+      <nav>
+        <ul>
+          <li><a href="#home">Home</a></li>
+          <li><a href="#products">Products</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#order">Order Booking</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="home">
+    <section class="hero">
+      <div class="container hero-grid">
+        <div>
+          <h1>Reliable Manufacturing Solutions for Modern Industry</h1>
+          <p>
+            We design and manufacture high-quality products with precision, consistency, and timely delivery.
+            Explore our product range and place orders easily through our professional booking system.
+          </p>
+          <div class="btns">
+            <a href="#products" class="btn primary">View Products</a>
+            <a href="#order" class="btn secondary">Book Order</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="container">
+        <div class="section-title">
+          <h2>Why Choose Us</h2>
+          <p>Built for industrial buyers who value quality, trust, and straightforward ordering.</p>
+        </div>
+        <div class="features">
+          <div class="feature">
+            <h3>High Quality</h3>
+            <p>Precision manufacturing with strict quality control at every stage.</p>
+          </div>
+          <div class="feature">
+            <h3>On-Time Delivery</h3>
+            <p>Efficient production planning to meet deadlines and business schedules.</p>
+          </div>
+          <div class="feature">
+            <h3>Custom Orders</h3>
+            <p>Flexible product options to match customer specifications and requirements.</p>
+          </div>
+          <div class="feature">
+            <h3>Trusted Support</h3>
+            <p>Quick response from our sales team for booking, pricing, and support.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="products">
+      <div class="container">
+        <div class="section-title">
+          <h2>Our Products</h2>
+          <p>Showcase your main product categories with clear visuals and short descriptions.</p>
+        </div>
+        <div class="products">
+          <div class="product">
+            <img src="https://images.unsplash.com/photo-1513828583688-c52646db42da?auto=format&fit=crop&w=1200&q=80" alt="Industrial equipment">
+            <div class="product-content">
+              <span class="tag">Category 01</span>
+              <h3>Industrial Machines</h3>
+              <p>Durable machines designed for efficiency, reliability, and long-term performance.</p>
+            </div>
+          </div>
+          <div class="product">
+            <img src="https://images.unsplash.com/photo-1581092160607-ee22731c6f3b?auto=format&fit=crop&w=1200&q=80" alt="Metal parts">
+            <div class="product-content">
+              <span class="tag">Category 02</span>
+              <h3>Metal Components</h3>
+              <p>Precision-engineered parts for manufacturing, assembly, and industrial use.</p>
+            </div>
+          </div>
+          <div class="product">
+            <img src="https://images.unsplash.com/photo-1565619636519-e670ca52f15a?auto=format&fit=crop&w=1200&q=80" alt="Factory production">
+            <div class="product-content">
+              <span class="tag">Category 03</span>
+              <h3>Custom Fabrication</h3>
+              <p>Tailor-made solutions developed according to customer drawings and needs.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="about">
+      <div class="container about-grid">
+        <div class="about-img">
+          <img src="https://images.unsplash.com/photo-1494412651409-8963ce7935c8?auto=format&fit=crop&w=1400&q=80" alt="Manufacturing facility">
+        </div>
+        <div class="about-text">
+          <h2>About Our Company</h2>
+          <p>
+            We are a professional manufacturing company focused on product quality, technical accuracy, and dependable service.
+            Our team works with modern processes to support both standard and custom production.
+          </p>
+          <p>
+            From inquiry to delivery, we keep communication simple and transparent so customers can order with confidence.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section id="order">
+      <div class="container">
+        <div class="section-title">
+          <h2>Order Booking</h2>
+          <p>Use this form for product inquiry, quotation, or order placement.</p>
+        </div>
+
+        <div class="order-wrap">
+          <div class="form-card">
+            <form>
+              <div class="row">
+                <input type="text" placeholder="Full Name" required />
+                <input type="text" placeholder="Company Name" required />
+              </div>
+              <div class="row">
+                <input type="email" placeholder="Email Address" required />
+                <input type="tel" placeholder="Phone Number" required />
+              </div>
+              <div class="row">
+                <select required>
+                  <option value="">Select Product</option>
+                  <option>Industrial Machines</option>
+                  <option>Metal Components</option>
+                  <option>Custom Fabrication</option>
+                </select>
+                <input type="number" placeholder="Quantity" min="1" required />
+              </div>
+              <textarea placeholder="Write your requirement, specifications, size, material, or delivery details..."></textarea>
+              <button type="submit" class="submit-btn">Submit Order Request</button>
+            </form>
+          </div>
+
+          <div class="info-card">
+            <h3>Booking Information</h3>
+            <ul>
+              <li>Fast quotation response for business customers.</li>
+              <li>Custom specifications accepted for bulk and special orders.</li>
+              <li>Upload drawings and technical details through email after submission.</li>
+              <li>Confirmation and follow-up from sales team within working hours.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact">
+      <div class="container">
+        <div class="section-title">
+          <h2>Contact Us</h2>
+          <p>Make it easy for buyers to reach your sales team in multiple ways.</p>
+        </div>
+        <div class="contact-grid">
+          <div class="contact-box">
+            <h3>Email</h3>
+            <p>sales@yourcompany.com</p>
+          </div>
+          <div class="contact-box">
+            <h3>Phone</h3>
+            <p>+91 XXXXX XXXXX</p>
+          </div>
+          <div class="contact-box">
+            <h3>Location</h3>
+            <p>Your City, State, India</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2026 Your Manufacturing Company. All rights reserved.</p>
+  </footer>
+
+</body>
+</html>
